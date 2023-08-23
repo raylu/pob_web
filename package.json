@@ -5,6 +5,11 @@
   "repository": "https://github.com/raylu/pob_web.git",
   "author": "raylu",
   "private": false,
+  "scripts": {
+    "serve": "rollup -c -p 'serve={contentBase:\"www\"}' -w",
+    "build": "rollup -c",
+    "lint": "eslint ."
+  },
   "dependencies": {
     "wasmoon": "^1.15.0"
   },

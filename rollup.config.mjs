@@ -8,6 +8,7 @@ export default {
 	output: {
 		dir: 'www',
 		format: 'es',
+		sourcemap: true,
 	},
 	plugins: [
 		esbuild({
