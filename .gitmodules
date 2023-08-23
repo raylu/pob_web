@@ -1,0 +1,3 @@
+[submodule "PathOfBuilding"]
+	path = PathOfBuilding
+	url = git@github.com:PathOfBuildingCommunity/PathOfBuilding.git
