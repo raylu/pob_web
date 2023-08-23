@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"outDir": "./static",
+		"target": "esnext",
+		"module": "esnext",
+		"moduleResolution": "nodenext",
+		"incremental": true,
+	},
+	"include": ["./src/**/*"],
+}
