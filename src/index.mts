@@ -11,7 +11,7 @@ async function runFile(path: string) {
 try {
 	// Set a JS function to be a global lua function
 	lua.global.set('sum', (x, y) => x + y);
-	runFile("lua/Launch.lua");
+	runFile('lua/Launch.lua');
 } finally {
 	lua.global.close();
 }
