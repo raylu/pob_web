@@ -32,3 +32,5 @@ end
 function bit.rshift(a, b)
 	return ((a & 0xFFFFFFFF) >> b) & 0xFFFFFFFF
 end
+
+arg = {}
