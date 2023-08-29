@@ -6,16 +6,20 @@
   "author": "raylu",
   "private": false,
   "scripts": {
+    "pack-lua": "esrun src/pack_lua.mts",
     "serve": "rollup -c -p 'serve={contentBase:\"www\"}' -w",
     "build": "rollup -c",
     "lint": "eslint ."
   },
   "dependencies": {
+    "msgpackr": "^1.9.7",
     "wasmoon": "^1.15.0"
   },
   "devDependencies": {
+    "@digitak/esrun": "^3.2.24",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.2.1",
+    "@types/node": "^20.5.7",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "esbuild": "^0.19.2",
