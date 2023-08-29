@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import {Packr} from 'msgpackr';
 
-function *iterLua(dir: string): Iterable<string> {
+function* iterLua(dir: string): Iterable<string> {
 	for (const path of fs.readdirSync('PathOfBuilding/' + dir, {recursive: true, encoding: 'utf-8'})) {
 		if (!path.endsWith('.lua'))
 			continue;
@@ -11,20 +11,20 @@ function *iterLua(dir: string): Iterable<string> {
 	}
 }
 
-const packr = new Packr({ useRecords: true, bundleStrings: true });
+const packr = new Packr({useRecords: true, bundleStrings: true});
 
-(() => {
-	const src = {};
-	for (const path of iterLua('src'))
-		src[path] = fs.readFileSync('PathOfBuilding/src/' + path);
-	console.log(`writing ${Object.keys(src).length} lua files to www/src.msgpack`);
-	fs.writeFileSync('www/src.msgpack', packr.pack(src));
-})();
+function writePack(dir: string, filename: string) {
+	const pack = {};
+	for (const path of iterLua(dir)) {
+		let src = fs.readFileSync(`PathOfBuilding/${dir}/${path}`, {encoding: 'utf-8'});
+		const split = src.split('\n', 1);
+		if (split[0].substring(0, 2) == '#@')
+			src = '--' + src; // ignore the first line
+		pack[path] = src;
+	}
+	console.log(`writing ${Object.keys(pack).length} lua files to www/${filename}.msgpack`);
+	fs.writeFileSync(`www/${filename}.msgpack`, packr.pack(pack));
+}
 
-(() => {
-	const runtime = {};
-	for (const path of iterLua('runtime/lua'))
-		runtime[path] = fs.readFileSync('PathOfBuilding/runtime/lua/' + path);
-	console.log(`writing ${Object.keys(runtime).length} lua files to www/runtime.msgpack`);
-	fs.writeFileSync('www/runtime.msgpack', packr.pack(runtime));
-})();
+writePack('src', 'src');
+writePack('runtime/lua', 'runtime');
